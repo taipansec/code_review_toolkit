@@ -29,7 +29,7 @@ POSIX shell, Python 3, and standard CLI tools.
 - Bash, `grep` (GNU or BSD), `find`, `unzip`, `awk`, `sed`
 - Python 3 (used by `05_dep_audit.sh` and `07_email_alerts_audit.sh`)
 - Node.js + npm (only if you want to use `build_report.js` to generate a Word
-  report)
+  report) --- coming soon...
 
 ## Usage
 
@@ -46,14 +46,6 @@ bash security_review_scripts/07_email_alerts_audit.sh . example.com     | tee 07
 bash security_review_scripts/08_email_search.sh . someone@example.com   | tee 08_email.txt
 ```
 
-To build the (optional) Word report:
-
-```bash
-cd security_review_scripts
-npm install docx
-node build_report.js
-```
-
 ## What each script does
 
 | Script | Purpose |
@@ -66,7 +58,7 @@ node build_report.js
 | `06_log_triage.sh` | Sizes and content-profile every `*.log` and `storage/logs/*.log`. Counts ERROR / Exception lines, lists distinct email recipients, scans for credentials / Bearer tokens / Gmail App Password format leaking into logs. |
 | `07_email_alerts_audit.sh` | If your app logs `email_alerts` row dumps to `storage/logs/`, this extracts the recipient sets, dedups per alert id, flags any alert where the same address appears in TO + CC + BCC simultaneously, flags external / personal mailbox recipients vs. the corporate domains you pass on the command line. |
 | `08_email_search.sh` | Exhaustive search for a specific email address across source, logs, CSVs, and inside `.xlsx` archives (`xl/sharedStrings.xml`). Also checks base64 and URL-encoded forms. |
-| `build_report.js` | Node.js generator that builds a Word security review (uses [`docx`](https://www.npmjs.com/package/docx)). Edit the findings array to match your own audit. |
+
 
 ## Configuration
 
